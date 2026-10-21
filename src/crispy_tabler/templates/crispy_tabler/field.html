@@ -1,5 +1,6 @@
 {# vendored from crispy-bootstrap5 2026.9: field.html #}
 {% load crispy_forms_field %}
+{% load crispy_tabler_field %}
 
 {% if field.is_hidden %}
     {{ field }}
@@ -14,7 +15,7 @@
         {% if field.label and not field|is_checkbox and form_show_labels %}
             {% if field.use_fieldset %}<fieldset{% if 'form-horizontal' in form_class %} class="row"{% endif %}{% if field.aria_describedby %} aria-describedby="{{ field.aria_describedby }}"{% endif %}>{% endif %}
             <{% if field.use_fieldset %}legend{% else %}label{% endif %}
-                {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %} class="{% if 'form-horizontal' in form_class %}col-form-label pt-0{% else %}form-label{% endif %}{% if label_class %} {{ label_class }}{% endif %}{% if field.field.required %} requiredField{% endif %}{% if field.use_fieldset %} fs-6{% endif %}">
+                {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %} class="{% if 'form-horizontal' in form_class %}col-form-label pt-0{% else %}form-label{% endif %}{% if label_class %} {{ label_class }}{% endif %}{% if field.field.required %} requiredField{% endif %}">
                 {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
             </{% if field.use_fieldset %}legend{% else %}label{% endif %}>
         {% endif %}
@@ -43,6 +44,18 @@
                             {% crispy_field field 'class' 'form-select is-invalid' %}
                         {% else %}
                             {% crispy_field field 'class' 'form-select' %}
+                        {% endif %}
+                    {% elif field|is_range %}
+                        {% if field.errors %}
+                            {% crispy_field field 'class' 'form-range is-invalid' %}
+                        {% else %}
+                            {% crispy_field field 'class' 'form-range' %}
+                        {% endif %}
+                    {% elif field|is_color %}
+                        {% if field.errors %}
+                            {% crispy_field field 'class' 'form-control form-control-color is-invalid' %}
+                        {% else %}
+                            {% crispy_field field 'class' 'form-control form-control-color' %}
                         {% endif %}
                     {% elif field|is_checkbox %}
                         {% if field.errors %}
