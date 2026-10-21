@@ -34,7 +34,8 @@ def render_layout(*layout_objects, form=None, helper=None):
     """Render a form through a FormHelper whose layout is the given objects."""
     from tests.forms import CoverageForm
 
-    helper = helper or FormHelper()
+    if helper is None:  # FormHelper defines __len__, so an empty one is falsy
+        helper = FormHelper()
     helper.form_tag = False
     helper.layout = Layout(*layout_objects)
     return _render_with_helper(helper, form or CoverageForm())
