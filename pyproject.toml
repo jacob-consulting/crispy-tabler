@@ -26,10 +26,12 @@ requires-python = ">=3.12"
 dependencies = [
     "django>=5.2",
     "django-crispy-forms>=2.4",
+    # crispy_tabler.layout subclasses its FloatingField and Switch.
+    "crispy-bootstrap5>=2026.9",
 ]
 
 [project.optional-dependencies]
-# Pinned exactly: the provenance test fails loudly when this pin is deliberately raised.
+# Pinned exactly (unlike the runtime floor above, so the vendoring tests stay deterministic): the provenance test fails loudly when this pin is deliberately raised.
 test = [
     "pytest",
     "pytest-django",

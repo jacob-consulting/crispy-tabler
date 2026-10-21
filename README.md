@@ -24,7 +24,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ("crispy_tabler",)
 CRISPY_TEMPLATE_PACK = "crispy_tabler"
 ```
 
-The templates work without `crispy_bootstrap5` in `INSTALLED_APPS`. `crispy_tabler.layout` subclasses `crispy_bootstrap5` classes, so that package must still be importable if you use it.
+`crispy-bootstrap5` is installed automatically as a dependency, but it does not need to be in `INSTALLED_APPS`.
 
 ## What is fixed
 
