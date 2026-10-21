@@ -38,3 +38,14 @@ def test_a_file_field_renders_its_help_text_once():
 def test_a_checkbox_in_a_table_cell_has_no_wrapper_div():
     html = render_field(forms.BooleanField(), tag="td")
     assert html.count("<div") == 0
+
+
+def test_inline_radio_and_checkbox_group_legends_are_plain_form_labels():
+    from crispy_forms.bootstrap import InlineCheckboxes, InlineRadios
+
+    from tests.helpers import render_layout
+
+    for obj in (InlineRadios("radio"), InlineCheckboxes("checkbox_group")):
+        html = render_layout(obj)
+        assert "<legend" in html
+        assert "fs-6" not in html and "form-label" in html
