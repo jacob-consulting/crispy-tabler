@@ -72,9 +72,9 @@ class ProductForm(forms.Form):
 
 `PlaintextField` is disabled by default, so a posted value is ignored. The value must therefore come from `initial` (on the field or the form). It appears in `cleaned_data` as that initial, `has_changed()` is always `False`, and passing `disabled=False` makes the field accept posted data that the widget never renders. `PlaintextInput` keeps extra CSS classes you pass (`attrs={"class": "fw-bold"}`) next to `form-control-plaintext`.
 
-## Known gap: django-crud-views detail pages
+## Use with django-crud-views
 
-If you use [django-crud-views](https://github.com/jacob-consulting/django-crud-views), its create, update, detail and delete pages and the list filter all render through this pack, and `crispy_bootstrap5` can stay out of `INSTALLED_APPS`. (`crud_views/detail/field.html` hardcodes `bootstrap5/...` includes, but nothing renders that template; reported upstream as django-crud-views#217.)
+If you use [django-crud-views](https://github.com/jacob-consulting/django-crud-views), its create, update, detail and delete pages and the list filter all render through this pack, and `crispy_bootstrap5` can stay out of `INSTALLED_APPS`. The one template in that package with hardcoded `bootstrap5/...` includes, `crud_views/detail/field.html`, was dead code and is gone: reported as [django-crud-views#217](https://github.com/jacob-consulting/django-crud-views/issues/217) and removed upstream with the rest of `crud_views/detail/` after 0.30.0. On 0.30.0 and earlier the file still ships, but nothing renders it, so it costs you nothing there either.
 
 ## Provenance
 
