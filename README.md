@@ -2,7 +2,7 @@
 
 A [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) template pack for the [Tabler](https://tabler.io) UI kit.
 
-Tabler is built on Bootstrap 5, and `crispy-bootstrap5` renders most forms acceptably under it. The gaps are the places where Tabler has its own class: range sliders, colour pickers, fieldsets, form footers, read-only values. `crispy-tabler` is a self-contained copy of the `crispy-bootstrap5` templates with those gaps fixed, plus a few widgets and layout objects. It does not depend on `crispy-bootstrap5` at runtime.
+Tabler is built on Bootstrap 5, and `crispy-bootstrap5` renders most forms acceptably under it. The gaps are the places where Tabler has its own class: range sliders, colour pickers, fieldsets, form footers, read-only values. `crispy-tabler` is a self-contained copy of the `crispy-bootstrap5` templates with those gaps fixed, plus a few widgets and layout objects. Its templates never reference `bootstrap5/`.
 
 Requires Python 3.12+, Django 5.2+ and django-crispy-forms 2.4+. It ships no CSS; load Tabler yourself.
 
@@ -24,7 +24,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ("crispy_tabler",)
 CRISPY_TEMPLATE_PACK = "crispy_tabler"
 ```
 
-`crispy_bootstrap5` does not need to be installed.
+The templates work without `crispy_bootstrap5` in `INSTALLED_APPS`. `crispy_tabler.layout` subclasses `crispy_bootstrap5` classes, so that package must still be importable if you use it.
 
 ## What is fixed
 
