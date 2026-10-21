@@ -2,4 +2,11 @@
 
 ## 0.1.0 (unreleased)
 
-- Package skeleton, Django app and vendoring provenance.
+First release.
+
+- Template pack `crispy_tabler`: all templates of `crispy-bootstrap5` 2026.9, vendored and self-contained (no `bootstrap5/` references).
+- Tabler fixes: `form-range`, `form-control-color`, `form-control-plaintext` for `UneditableField`, `form-fieldset`, `form-footer`, and full-size labels on radio and checkbox groups.
+- `crispy_tabler.layout`: `UneditableField`, `FloatingField` and `Switch`, which follow `CRISPY_TEMPLATE_PACK`.
+- `crispy_tabler.widgets`: `RangeInput`, `ColorInput`, `PlaintextInput`.
+- `crispy_tabler.fields`: `RangeField`, `ColorField`, `PlaintextField`.
+- Known gap: django-crud-views detail pages still include Bootstrap partials.

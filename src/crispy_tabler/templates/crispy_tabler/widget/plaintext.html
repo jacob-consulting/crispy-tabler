@@ -1,0 +1,2 @@
+{# crispy adds "form-control" and "required" to attrs; neither belongs on a div, so only the other attrs pass through. #}
+<div class="form-control-plaintext"{% for name, value in widget.attrs.items %}{% if name != "class" and name != "required" and value is not False %} {{ name }}{% if value is not True %}="{{ value|stringformat:'s' }}"{% endif %}{% endif %}{% endfor %}>{{ widget.value|default_if_none:"" }}</div>

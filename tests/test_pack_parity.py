@@ -56,6 +56,8 @@ def test_no_template_resolves_to_the_bootstrap5_pack():
 def test_every_template_records_its_provenance():
     for p in pack_files():
         rel = p.relative_to(PACK_ROOT).as_posix()
+        if rel.startswith("widget/"):
+            continue  # originals of this package, not vendored
         expected = f"{{# vendored from crispy-bootstrap5 {CRISPY_BOOTSTRAP5_VERSION}: {rel} #}}"
         assert p.read_text().splitlines()[0] == expected, rel
 
