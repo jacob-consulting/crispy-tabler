@@ -1,5 +1,7 @@
-from crispy_forms.bootstrap import FormActions, UneditableField
+from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import Fieldset, Submit
+
+from crispy_tabler.layout import UneditableField
 
 from tests.helpers import render_horizontal, render_layout
 
@@ -30,3 +32,8 @@ def test_an_explicit_css_class_still_wins_on_fieldset():
 def test_a_horizontal_form_keeps_its_label_columns():
     html = render_horizontal(UneditableField("char"))
     assert "col-form-label" in html
+
+
+def test_uneditable_field_keeps_an_explicit_css_class():
+    html = render_layout(UneditableField("char", css_class="extra"))
+    assert "form-control-plaintext extra" in html and "uneditable-input" not in html
