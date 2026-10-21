@@ -21,7 +21,7 @@ TEMPLATES = [
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
 
 CRISPY_TEMPLATE_PACK = "crispy_tabler"
-CRISPY_ALLOWED_TEMPLATE_PACKS = ("crispy_tabler", "bootstrap5")
+CRISPY_ALLOWED_TEMPLATE_PACKS = ("crispy_tabler",)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 USE_TZ = True

@@ -54,6 +54,8 @@ from crispy_tabler.layout import UneditableField, FloatingField, Switch
 
 The originals cannot be fixed from a template. `UneditableField` sets a Bootstrap 2 class on the widget in Python. `FloatingField` and `Switch` hardcode `bootstrap5/layout/...` template paths, so with `crispy_bootstrap5` not in `INSTALLED_APPS` they raise `TemplateDoesNotExist`. The `crispy_tabler.layout` versions subclass the originals and follow `CRISPY_TEMPLATE_PACK`. The `FloatingField` / `Switch` part is reported upstream as [crispy-bootstrap5#226](https://github.com/django-crispy-forms/crispy-bootstrap5/issues/226); if that is fixed, those two subclasses become unnecessary.
 
+`BS5Accordion` needs no swap: its template path is `%s`-relative, so keep importing it from `crispy_bootstrap5.bootstrap5` and it renders through this pack. It is why `crispy-bootstrap5` remains a dependency.
+
 ## Widgets and fields
 
 ```python
@@ -72,7 +74,7 @@ class ProductForm(forms.Form):
 
 ## Known gap: django-crud-views detail pages
 
-If you use [django-crud-views](https://github.com/jacob-consulting/django-crud-views), its create, update and delete pages render through this pack. Its *detail* pages do not: `crud_views/detail/field.html` hardcodes four `bootstrap5/...` includes, so those pages still need `crispy_bootstrap5` installed and in `INSTALLED_APPS`. An upstream issue is being filed.
+If you use [django-crud-views](https://github.com/jacob-consulting/django-crud-views), its create, update, detail and delete pages and the list filter all render through this pack, and `crispy_bootstrap5` can stay out of `INSTALLED_APPS`. (`crud_views/detail/field.html` hardcodes `bootstrap5/...` includes, but nothing renders that template; reported upstream as django-crud-views#217.)
 
 ## Provenance
 
