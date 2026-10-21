@@ -34,7 +34,7 @@ CRISPY_TEMPLATE_PACK = "crispy_tabler"
 | 2 | `type="range"` inputs get `form-control` and lose their track | `form-range` |
 | 3 | `type="color"` inputs get `form-control` and stretch to a full-width bar | `form-control-color` |
 | 4 | `Fieldset` renders a bare `<fieldset><legend>` | `form-fieldset` by default; an explicit `css_class` is appended |
-| 5 | `FormActions` has no spacing from the last field (`mb-3`) | `form-footer` |
+| 5 | `FormActions` buttons sit directly under the last field, separated only by its `mb-3` margin | `form-footer` |
 | 6 | Radio and checkbox group labels are shrunk with `fs-6` | plain `form-label`, same size as other labels |
 
 Range and colour inputs are detected by their `type` attribute (`NumberInput(attrs={"type": "range"})` works) or, failing that, by the widget's `input_type`.
@@ -52,7 +52,7 @@ from crispy_bootstrap5.bootstrap5 import FloatingField, Switch
 from crispy_tabler.layout import UneditableField, FloatingField, Switch
 ```
 
-The originals cannot be fixed from a template. `UneditableField` sets a Bootstrap 2 class on the widget in Python. `FloatingField` and `Switch` hardcode `bootstrap5/layout/...` template paths, so with `crispy_bootstrap5` absent they raise `TemplateDoesNotExist`. The `crispy_tabler.layout` versions subclass the originals and follow `CRISPY_TEMPLATE_PACK`.
+The originals cannot be fixed from a template. `UneditableField` sets a Bootstrap 2 class on the widget in Python. `FloatingField` and `Switch` hardcode `bootstrap5/layout/...` template paths, so with `crispy_bootstrap5` not in `INSTALLED_APPS` they raise `TemplateDoesNotExist`. The `crispy_tabler.layout` versions subclass the originals and follow `CRISPY_TEMPLATE_PACK`.
 
 ## Widgets and fields
 
@@ -62,11 +62,13 @@ from crispy_tabler.widgets import ColorInput, PlaintextInput, RangeInput
 
 class ProductForm(forms.Form):
     sku = PlaintextField(initial="SKU-1")      # value in a form-control-plaintext element, no input
-    rating = RangeField(widget=RangeInput(min=1, max=5))
+    rating = RangeField(min_value=1, max_value=5)
     accent = ColorField()
 ```
 
-`RangeInput` and `ColorInput` only set the right `input_type`; the CSS classes come from the templates. `PlaintextInput` renders the value, not an input. `PlaintextField` is disabled by default, so a posted value is ignored in favour of the initial one.
+`RangeInput` and `ColorInput` only set the right `input_type`; the CSS classes come from the templates. `PlaintextInput` renders the value, not an input. Bounds given only to the widget (`RangeInput(min=1, max=5)`) are presentation, not validation: a posted `99` still validates. Use `min_value` / `max_value` on the field, which also render the `min` / `max` attributes.
+
+`PlaintextField` is disabled by default, so a posted value is ignored. The value must therefore come from `initial` (on the field or the form). It appears in `cleaned_data` as that initial, `has_changed()` is always `False`, and passing `disabled=False` makes the field accept posted data that the widget never renders. `PlaintextInput` keeps extra CSS classes you pass (`attrs={"class": "fw-bold"}`) next to `form-control-plaintext`.
 
 ## Known gap: django-crud-views detail pages
 

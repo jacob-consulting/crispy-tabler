@@ -29,3 +29,16 @@ class PlaintextInput(forms.Widget):
     """Renders the value as text in a form-control-plaintext element, not an input."""
 
     template_name = "crispy_tabler/widget/plaintext.html"
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        widget_attrs = dict(context["widget"]["attrs"])
+        # crispy adds "plaintextinput", "form-control" (a bordered input look) and "required";
+        # a display div wants neither. "disabled" is invalid on a div. Other
+        # classes the caller passed are kept.
+        classes = [c for c in widget_attrs.pop("class", "").split() if c not in ("form-control", "plaintextinput")]
+        for invalid in ("required", "disabled"):
+            widget_attrs.pop(invalid, None)
+        context["widget"]["attrs"] = widget_attrs
+        context["widget"]["css_class"] = " ".join(["form-control-plaintext", *classes])
+        return context

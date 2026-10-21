@@ -1,3 +1,5 @@
+import re
+
 from django import forms
 
 from crispy_tabler.fields import ColorField, PlaintextField, RangeField
@@ -46,7 +48,32 @@ def test_fields_bind_their_widgets():
     assert isinstance(ColorField().widget, ColorInput)
 
 
-def test_plaintext_widget_has_one_class_attribute_and_no_form_control():
+def test_plaintext_widget_renders_a_clean_div():
     html = render_field(forms.CharField(widget=PlaintextInput(), initial="SKU-1"))
-    assert html.count('class="form-control-plaintext"') == 1
-    assert "plaintextinput" not in html and "required id" not in html
+    tag = re.search(r"<div class=\"form-control-plaintext[^>]*>SKU-1</div>", html).group(0)
+    assert tag.count("class=") == 1
+    for bad in ("form-control ", "plaintextinput", "required", "disabled"):
+        assert bad not in tag
+
+
+def test_plaintext_widget_keeps_a_callers_class():
+    widget = PlaintextInput(attrs={"class": "fw-bold"})
+    html = render_field(forms.CharField(widget=widget, initial="x"))
+    assert 'class="form-control-plaintext fw-bold"' in html
+
+
+def test_plaintext_field_renders_without_disabled_on_the_div():
+    html = render_field(PlaintextField(initial="x"))
+    assert "disabled" not in html and ">x</div>" in html
+
+
+def test_range_field_bounds_are_validated_and_rendered():
+    field = RangeField(min_value=1, max_value=5)
+    html = render_field(field)
+    assert 'min="1"' in html and 'max="5"' in html
+    try:
+        field.clean("99")
+    except forms.ValidationError:
+        pass
+    else:
+        raise AssertionError("99 should be rejected")

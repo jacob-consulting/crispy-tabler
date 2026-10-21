@@ -9,4 +9,5 @@ First release.
 - `crispy_tabler.layout`: `UneditableField`, `FloatingField` and `Switch`, which follow `CRISPY_TEMPLATE_PACK`.
 - `crispy_tabler.widgets`: `RangeInput`, `ColorInput`, `PlaintextInput`.
 - `crispy_tabler.fields`: `RangeField`, `ColorField`, `PlaintextField`.
+- Runtime dependency on `crispy-bootstrap5>=2026.9`, because `crispy_tabler.layout` subclasses its `FloatingField` and `Switch`.
 - Known gap: django-crud-views detail pages still include Bootstrap partials.
