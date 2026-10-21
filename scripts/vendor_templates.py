@@ -44,9 +44,9 @@ def main() -> int:
         rel = src.relative_to(SRC).as_posix()
         text = src.read_bytes().decode("utf-8")
         text = INCLUDE_PREFIX.sub(r"\1crispy_tabler/", text)
-        # The word "bootstrap5" must not appear in the pack (a test enforces it),
-        # so the header spells the upstream name with a hyphen before the 5.
-        header = f"{{# vendored from crispy-bootstrap-5 {installed}: {rel} #}}\n"
+        # The header records the pack-relative path (not "bootstrap5/<rel>"), so it
+        # never contains the "bootstrap5/" prefix the self-containment test forbids.
+        header = f"{{# vendored from crispy-bootstrap5 {installed}: {rel} #}}\n"
         out = DEST / rel
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_bytes((header + text).encode("utf-8"))

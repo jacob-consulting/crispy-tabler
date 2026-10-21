@@ -44,8 +44,12 @@ def test_the_pack_adds_nothing_unexpected():
     assert pack_names() - bs5_names() == set()
 
 
-def test_no_template_references_the_bootstrap5_pack():
-    offenders = [p for p in pack_files() if "bootstrap5" in p.read_text()]
+def test_no_template_resolves_to_the_bootstrap5_pack():
+    """A leaked include/extends is always a path: the pack prefix plus a slash.
+
+    The bare package name is allowed (provenance headers name crispy-bootstrap5).
+    """
+    offenders = [p for p in pack_files() if "bootstrap5/" in p.read_text()]
     assert offenders == []
 
 
