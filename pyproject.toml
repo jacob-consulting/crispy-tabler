@@ -1,0 +1,49 @@
+[project]
+name = "crispy-tabler"
+version = "0.1.0"
+description = "A django-crispy-forms template pack for the Tabler UI kit"
+authors = [
+    { name = "Alexander Jacob", email = "alexander.jacob@jacob-consulting.de" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Framework :: Django",
+    "Framework :: Django :: 5",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6",
+    "Framework :: Django :: 6.0",
+    "Framework :: Django :: 6.1",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.2",
+    "django-crispy-forms>=2.4",
+]
+
+[project.optional-dependencies]
+# Pinned exactly: the provenance test fails loudly when this pin is deliberately raised.
+test = [
+    "pytest",
+    "pytest-django",
+    "crispy-bootstrap5==2026.9",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+pythonpath = ["."]
+addopts = "--strict-markers"
