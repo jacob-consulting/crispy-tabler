@@ -12,7 +12,7 @@ def test_uneditable_field_is_a_plaintext_control():
 
 
 def test_uneditable_field_label_is_a_form_label():
-    assert "form-label" in render_layout(UneditableField("char"))
+    assert '<label class="form-label ' in render_layout(UneditableField("char"))
 
 
 def test_form_actions_get_the_tabler_footer():
@@ -26,7 +26,7 @@ def test_fieldset_gets_the_tabler_class_by_default():
 
 def test_an_explicit_css_class_still_wins_on_fieldset():
     html = render_layout(Fieldset("Internal", "char", css_class="custom"))
-    assert "custom" in html
+    assert 'class="form-fieldset custom"' in html
 
 
 def test_a_horizontal_form_keeps_its_label_columns():
