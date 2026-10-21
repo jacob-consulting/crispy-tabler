@@ -52,7 +52,7 @@ from crispy_bootstrap5.bootstrap5 import FloatingField, Switch
 from crispy_tabler.layout import UneditableField, FloatingField, Switch
 ```
 
-The originals cannot be fixed from a template. `UneditableField` sets a Bootstrap 2 class on the widget in Python. `FloatingField` and `Switch` hardcode `bootstrap5/layout/...` template paths, so with `crispy_bootstrap5` not in `INSTALLED_APPS` they raise `TemplateDoesNotExist`. The `crispy_tabler.layout` versions subclass the originals and follow `CRISPY_TEMPLATE_PACK`.
+The originals cannot be fixed from a template. `UneditableField` sets a Bootstrap 2 class on the widget in Python. `FloatingField` and `Switch` hardcode `bootstrap5/layout/...` template paths, so with `crispy_bootstrap5` not in `INSTALLED_APPS` they raise `TemplateDoesNotExist`. The `crispy_tabler.layout` versions subclass the originals and follow `CRISPY_TEMPLATE_PACK`. The `FloatingField` / `Switch` part is reported upstream as [crispy-bootstrap5#226](https://github.com/django-crispy-forms/crispy-bootstrap5/issues/226); if that is fixed, those two subclasses become unnecessary.
 
 ## Widgets and fields
 
