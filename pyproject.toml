@@ -30,9 +30,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/alexander-jacob/crispy-tabler"
-Repository = "https://github.com/alexander-jacob/crispy-tabler"
-Issues = "https://github.com/alexander-jacob/crispy-tabler/issues"
+Homepage = "https://github.com/jacob-consulting/crispy-tabler"
+Repository = "https://github.com/jacob-consulting/crispy-tabler"
+Issues = "https://github.com/jacob-consulting/crispy-tabler/issues"
 
 [project.optional-dependencies]
 # Pinned exactly (unlike the runtime floor above, so the vendoring tests stay deterministic): the provenance test fails loudly when this pin is deliberately raised.
