@@ -47,3 +47,6 @@ where = ["src"]
 DJANGO_SETTINGS_MODULE = "tests.settings"
 pythonpath = ["."]
 addopts = "--strict-markers"
+
+[tool.setuptools.package-data]
+crispy_tabler = ["templates/**/*.html"]
