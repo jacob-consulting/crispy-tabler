@@ -1,5 +1,10 @@
 # crispy-tabler
 
+> **Archived.** This pack now lives in [django-crud-views-tabler](https://github.com/jacob-consulting/django-crud-views-tabler)
+> as `django_tabler`'s `crispy_tabler` template pack (the `crispy` extra), copied from this repository at `2f86558`. The
+> template pack name and the `CRISPY_*` settings are unchanged. Documentation:
+> https://django-crud-views-tabler.readthedocs.io/. This repository was never released and is no longer maintained.
+
 A [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms) template pack for the [Tabler](https://tabler.io) UI kit.
 
 Tabler is built on Bootstrap 5, and `crispy-bootstrap5` renders most forms acceptably under it. The gaps are the places where Tabler has its own class: range sliders, colour pickers, fieldsets, form footers, read-only values. `crispy-tabler` is a self-contained copy of the `crispy-bootstrap5` templates with those gaps fixed, plus a few widgets and layout objects. Its templates never reference `bootstrap5/`.
